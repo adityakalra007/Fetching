@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fetching Using Javascript</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-400 p-6">
+
+        <h1 class="font-bold mb-4 text-3xl">User List</h1>
+        <div id="user-list" class="grid grid-cols-1 md:grid-cols-3 gap-4"></div>
+ 
+</body>
+<script>
+
+  document.addEventListener("DOMContentLoaded", () => {
+  const userList = document.getElementById("user-list");
+
+  fetch("https://randomuser.me/api/?results=6")
+    .then(response => response.json())
+    .then(data => {
+      const users = data.results;
+      users.forEach(user => {
+        const userCard = document.createElement("div");
+        userCard.className = "bg-white p-4 rounded-lg shadow-md";
+
+        userCard.innerHTML = `
+          <img src="${user.picture.large}" class="w-24 h-24 rounded-full mx-auto mb-4" alt="${user.name.first}">
+          <h2 class="text-xl text-center font-semibold">${user.name.first} ${user.name.last}</h2>
+          <p class="text-center text-gray-600">${user.email}</p>
+        `;
+
+        userList.appendChild(userCard);
+      });
+    })
+    .catch(error => {
+      console.error("Fetch error:", error);
+      userList.innerHTML = "<p class='text-red-500'>Failed to load content</p>";
+    });
+});
+
+
+</script>
+</html>
