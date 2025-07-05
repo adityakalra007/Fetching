@@ -29,6 +29,8 @@
           <img src="${user.picture.large}" class="w-24 h-24 rounded-full mx-auto mb-4" alt="${user.name.first}">
           <h2 class="text-xl text-center font-semibold">${user.name.first} ${user.name.last}</h2>
           <p class="text-center text-gray-600">${user.email}</p>
+          <p class="text-center text-gray-600">${user.location.city}, ${user.location.country}</p>
+          <p class="text-center text-gray-600">Phone: ${user.phone}</p
         `;
 
         userList.appendChild(userCard);
